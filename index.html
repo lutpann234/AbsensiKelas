@@ -1,0 +1,693 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Absensi X RPL 1 - SMKN 2 MOJOKERTO</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef7ff, #f8fbff);
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: white;
+            padding: 28px 18px 55px;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 15px;
+            margin-top: 5px;
+        }
+
+        .header small {
+            display: block;
+            margin-top: 10px;
+            opacity: 0.9;
+            font-size: 12px;
+        }
+
+        /* CONTAINER */
+        .container {
+            width: 92%;
+            max-width: 900px;
+            margin: -30px auto 30px;
+        }
+
+        /* CARD */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dbe3ef;
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* BUTTON */
+        .btn {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* STATISTIK */
+        .info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .info-box strong {
+            display: block;
+            font-size: 22px;
+            color: #2563eb;
+            margin-bottom: 4px;
+        }
+
+        .info-box span {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* SEARCH */
+        .search {
+            margin-bottom: 15px;
+        }
+
+        /* TABLE */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 13px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 13px;
+        }
+
+        /* STATUS */
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            background: #dcfce7;
+            color: #15803d;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            color: #94a3b8;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 12px;
+            padding: 5px 20px 25px;
+        }
+
+        /* TAMPILAN HP */
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 24px 15px 48px;
+            }
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .card {
+                padding: 18px;
+                border-radius: 17px;
+            }
+
+            .info {
+                gap: 8px;
+            }
+
+            .info-box {
+                padding: 13px 5px;
+            }
+
+            .info-box strong {
+                font-size: 19px;
+            }
+
+            .info-box span {
+                font-size: 10px;
+            }
+
+            table {
+                min-width: 480px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <h1>📋 ABSENSI KELAS</h1>
+
+        <p><b>X RPL 1</b></p>
+
+        <p>SMKN 2 MOJOKERTO</p>
+
+        <small>
+            Silakan isi data untuk mencatat kehadiran
+        </small>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- FORM ABSENSI -->
+        <section class="card">
+
+            <h2>📝 Isi Absensi</h2>
+
+            <form id="absenForm">
+
+                <div class="form-group">
+
+                    <label for="nama">
+                        Nama Lengkap
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nama"
+                        placeholder="Masukkan nama lengkap"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="nisn">
+                        NISN
+                    </label>
+
+                    <input
+                        type="number"
+                        id="nisn"
+                        placeholder="Masukkan NISN"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="noAbsen">
+                        No. Absen
+                    </label>
+
+                    <input
+                        type="number"
+                        id="noAbsen"
+                        placeholder="Contoh: 01"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    ✓ Absen Sekarang
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- STATISTIK -->
+        <section class="info">
+
+            <div class="info-box">
+
+                <strong id="jumlahHadir">
+                    0
+                </strong>
+
+                <span>
+                    Sudah Hadir
+                </span>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong id="jumlahSiswa">
+                    0
+                </strong>
+
+                <span>
+                    Total Data
+                </span>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <strong id="persentase">
+                    0%
+                </strong>
+
+                <span>
+                    Kehadiran
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- DAFTAR KEHADIRAN -->
+        <section class="card">
+
+            <h2>👥 Daftar Kehadiran</h2>
+
+            <div class="search">
+
+                <input
+                    type="search"
+                    id="search"
+                    placeholder="🔎 Cari nama atau NISN..."
+                >
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+
+                            <th>Nama</th>
+
+                            <th>NISN</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="daftarAbsen">
+
+                        <tr>
+
+                            <td
+                                colspan="4"
+                                class="empty"
+                            >
+                                Belum ada siswa yang absen.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        SMKN 2 MOJOKERTO • X RPL 1
+
+    </footer>
+
+
+    <script>
+
+        /* DATA ABSENSI */
+
+        let dataAbsen =
+            JSON.parse(
+                localStorage.getItem("dataAbsen")
+            ) || [];
+
+
+        const form =
+            document.getElementById("absenForm");
+
+        const daftar =
+            document.getElementById("daftarAbsen");
+
+        const search =
+            document.getElementById("search");
+
+
+        /* MENAMPILKAN DATA */
+
+        function tampilkanData(filter = "") {
+
+            daftar.innerHTML = "";
+
+
+            let dataFilter =
+                dataAbsen.filter(function(data) {
+
+                    return (
+                        data.nama
+                            .toLowerCase()
+                            .includes(filter.toLowerCase())
+                        ||
+                        data.nisn.includes(filter)
+                    );
+
+                });
+
+
+            if (dataFilter.length === 0) {
+
+                daftar.innerHTML = `
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            class="empty"
+                        >
+                            Belum ada data absensi.
+                        </td>
+
+                    </tr>
+
+                `;
+
+                updateStatistik();
+
+                return;
+            }
+
+
+            dataFilter.forEach(function(data) {
+
+                let row =
+                    document.createElement("tr");
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${data.noAbsen}
+                    </td>
+
+                    <td>
+                        ${data.nama}
+                    </td>
+
+                    <td>
+                        ${data.nisn}
+                    </td>
+
+                    <td>
+
+                        <span class="status">
+                            Hadir
+                        </span>
+
+                    </td>
+
+                `;
+
+
+                daftar.appendChild(row);
+
+            });
+
+
+            updateStatistik();
+
+        }
+
+
+        /* STATISTIK */
+
+        function updateStatistik() {
+
+            const jumlah =
+                dataAbsen.length;
+
+
+            document.getElementById(
+                "jumlahHadir"
+            ).textContent = jumlah;
+
+
+            document.getElementById(
+                "jumlahSiswa"
+            ).textContent = jumlah;
+
+
+            document.getElementById(
+                "persentase"
+            ).textContent =
+                jumlah > 0
+                ? "100%"
+                : "0%";
+
+        }
+
+
+        /* SUBMIT ABSENSI */
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const nama =
+                    document
+                    .getElementById("nama")
+                    .value
+                    .trim();
+
+
+                const nisn =
+                    document
+                    .getElementById("nisn")
+                    .value
+                    .trim();
+
+
+                const noAbsen =
+                    document
+                    .getElementById("noAbsen")
+                    .value
+                    .trim();
+
+
+                /* CEK NISN */
+
+                const sudahAbsen =
+                    dataAbsen.some(
+                        function(data) {
+
+                            return data.nisn === nisn;
+
+                        }
+                    );
+
+
+                if (sudahAbsen) {
+
+                    alert(
+                        "⚠️ NISN tersebut sudah melakukan absensi!"
+                    );
+
+                    return;
+
+                }
+
+
+                /* SIMPAN DATA */
+
+                dataAbsen.push({
+
+                    nama: nama,
+
+                    nisn: nisn,
+
+                    noAbsen: noAbsen
+
+                });
+
+
+                localStorage.setItem(
+
+                    "dataAbsen",
+
+                    JSON.stringify(dataAbsen)
+
+                );
+
+
+                /* RESET FORM */
+
+                form.reset();
+
+
+                tampilkanData();
+
+
+                alert(
+                    "✅ Absensi berhasil dicatat!"
+                );
+
+            }
+        );
+
+
+        /* PENCARIAN */
+
+        search.addEventListener(
+            "input",
+            function() {
+
+                tampilkanData(
+                    this.value
+                );
+
+            }
+        );
+
+
+        /* JALANKAN SAAT HALAMAN DIBUKA */
+
+        tampilkanData();
+
+    </script>
+
+</body>
+</html>
+```
