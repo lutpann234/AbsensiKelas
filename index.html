@@ -112,6 +112,51 @@
             transform: translateY(-2px);
         }
 
+        /* LOGIN */
+        .login-card {
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .login-icon {
+            text-align: center;
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .login-description {
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .password-info {
+            text-align: center;
+            margin-top: 12px;
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        /* WELCOME */
+        .welcome {
+            background: linear-gradient(135deg, #eff6ff, #ecfeff);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 18px;
+        }
+
+        .welcome h3 {
+            color: #2563eb;
+            margin-bottom: 5px;
+        }
+
+        .welcome p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
         /* STATISTIK */
         .info {
             display: grid;
@@ -188,12 +233,30 @@
             font-size: 13px;
         }
 
+        /* LOGOUT */
+        .logout {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
         /* FOOTER */
         .footer {
             text-align: center;
             color: #94a3b8;
             font-size: 12px;
             padding: 5px 20px 25px;
+        }
+
+        /* SEMBUNYIKAN */
+        .hidden {
+            display: none;
         }
 
         /* TAMPILAN HP */
@@ -255,7 +318,7 @@
         <p>SMKN 2 MOJOKERTO</p>
 
         <small>
-            Silakan isi data untuk mencatat kehadiran
+            Sistem Absensi Siswa
         </small>
 
     </header>
@@ -263,23 +326,40 @@
 
     <main class="container">
 
-        <!-- FORM ABSENSI -->
-        <section class="card">
+        <!-- ================= LOGIN ================= -->
 
-            <h2>📝 Isi Absensi</h2>
+        <section
+            class="card login-card"
+            id="loginPage"
+        >
 
-            <form id="absenForm">
+            <div class="login-icon">
+                👋
+            </div>
+
+            <h2 style="text-align:center;">
+                Selamat Datang!
+            </h2>
+
+            <p class="login-description">
+                Masukkan nama panggilan dan password
+                untuk melakukan absensi kelas.
+            </p>
+
+
+            <form id="loginForm">
 
                 <div class="form-group">
 
-                    <label for="nama">
-                        Nama Lengkap
+                    <label for="username">
+                        Username
                     </label>
 
                     <input
                         type="text"
-                        id="nama"
-                        placeholder="Masukkan nama lengkap"
+                        id="username"
+                        placeholder="Masukkan nama panggilan"
+                        autocomplete="off"
                         required
                     >
 
@@ -288,19 +368,61 @@
 
                 <div class="form-group">
 
-                    <label for="nisn">
-                        NISN
+                    <label for="password">
+                        Password
                     </label>
 
                     <input
-                        type="number"
-                        id="nisn"
-                        placeholder="Masukkan NISN"
+                        type="password"
+                        id="password"
+                        placeholder="Masukkan password"
                         required
                     >
 
                 </div>
 
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    🔐 Masuk
+                </button>
+
+
+                <p class="password-info">
+                    Password kelas: <b>xrpl1</b>
+                </p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ================= HALAMAN ABSENSI ================= -->
+
+        <section
+            class="card hidden"
+            id="absenPage"
+        >
+
+            <div class="welcome">
+
+                <h3>
+                    Halo, <span id="namaUser"></span>! 👋
+                </h3>
+
+                <p>
+                    Silakan isi nomor absen kamu.
+                </p>
+
+            </div>
+
+
+            <h2>📝 Absensi Hari Ini</h2>
+
+
+            <form id="absenForm">
 
                 <div class="form-group">
 
@@ -311,7 +433,7 @@
                     <input
                         type="number"
                         id="noAbsen"
-                        placeholder="Contoh: 01"
+                        placeholder="Contoh: 12"
                         min="1"
                         required
                     >
@@ -328,11 +450,23 @@
 
             </form>
 
+
+            <button
+                class="logout"
+                onclick="logout()"
+            >
+                Keluar
+            </button>
+
         </section>
 
 
-        <!-- STATISTIK -->
-        <section class="info">
+        <!-- ================= STATISTIK ================= -->
+
+        <section
+            class="info hidden"
+            id="statistik"
+        >
 
             <div class="info-box">
 
@@ -375,17 +509,24 @@
         </section>
 
 
-        <!-- DAFTAR KEHADIRAN -->
-        <section class="card">
+        <!-- ================= DAFTAR KEHADIRAN ================= -->
 
-            <h2>👥 Daftar Kehadiran</h2>
+        <section
+            class="card hidden"
+            id="daftarPage"
+        >
+
+            <h2>
+                👥 Daftar Kehadiran
+            </h2>
+
 
             <div class="search">
 
                 <input
                     type="search"
                     id="search"
-                    placeholder="🔎 Cari nama atau NISN..."
+                    placeholder="🔎 Cari nama..."
                 >
 
             </div>
@@ -403,8 +544,6 @@
 
                             <th>Nama</th>
 
-                            <th>NISN</th>
-
                             <th>Status</th>
 
                         </tr>
@@ -417,7 +556,7 @@
                         <tr>
 
                             <td
-                                colspan="4"
+                                colspan="3"
                                 class="empty"
                             >
                                 Belum ada siswa yang absen.
@@ -436,7 +575,6 @@
     </main>
 
 
-    <!-- FOOTER -->
     <footer class="footer">
 
         SMKN 2 MOJOKERTO • X RPL 1
@@ -454,8 +592,22 @@
             ) || [];
 
 
-        const form =
-            document.getElementById("absenForm");
+        let userSekarang = "";
+
+
+        /* ELEMENT */
+
+        const loginPage =
+            document.getElementById("loginPage");
+
+        const absenPage =
+            document.getElementById("absenPage");
+
+        const statistik =
+            document.getElementById("statistik");
+
+        const daftarPage =
+            document.getElementById("daftarPage");
 
         const daftar =
             document.getElementById("daftarAbsen");
@@ -464,25 +616,217 @@
             document.getElementById("search");
 
 
-        /* MENAMPILKAN DATA */
+        /* LOGIN */
 
-        function tampilkanData(filter = "") {
+        document
+        .getElementById("loginForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document
+                    .getElementById("username")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                /* CEK PASSWORD */
+
+                if (password !== "xrpl1") {
+
+                    alert(
+                        "❌ Password salah!"
+                    );
+
+                    return;
+
+                }
+
+
+                if (username === "") {
+
+                    alert(
+                        "⚠️ Username harus diisi!"
+                    );
+
+                    return;
+
+                }
+
+
+                userSekarang =
+                    username;
+
+
+                /* TAMPILKAN HALAMAN ABSEN */
+
+                loginPage.classList.add("hidden");
+
+                absenPage.classList.remove("hidden");
+
+                statistik.classList.remove("hidden");
+
+                daftarPage.classList.remove("hidden");
+
+
+                document.getElementById(
+                    "namaUser"
+                ).textContent = username;
+
+
+                tampilkanData();
+
+            }
+        );
+
+
+        /* ABSEN */
+
+        document
+        .getElementById("absenForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const noAbsen =
+                    document
+                    .getElementById("noAbsen")
+                    .value
+                    .trim();
+
+
+                /* CEK USER SUDAH ABSEN */
+
+                const sudahAbsen =
+                    dataAbsen.some(
+                        function(data) {
+
+                            return (
+                                data.nama.toLowerCase()
+                                === userSekarang.toLowerCase()
+                            );
+
+                        }
+                    );
+
+
+                if (sudahAbsen) {
+
+                    alert(
+                        "⚠️ Kamu sudah melakukan absensi!"
+                    );
+
+                    return;
+
+                }
+
+
+                /* CEK NOMOR ABSEN */
+
+                const nomorSudahDipakai =
+                    dataAbsen.some(
+                        function(data) {
+
+                            return (
+                                data.noAbsen
+                                === noAbsen
+                            );
+
+                        }
+                    );
+
+
+                if (nomorSudahDipakai) {
+
+                    alert(
+                        "⚠️ Nomor absen tersebut sudah digunakan!"
+                    );
+
+                    return;
+
+                }
+
+
+                /* SIMPAN */
+
+                dataAbsen.push({
+
+                    nama: userSekarang,
+
+                    noAbsen: noAbsen,
+
+                    waktu:
+                        new Date()
+                        .toLocaleTimeString(
+                            "id-ID",
+                            {
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            }
+                        )
+
+                });
+
+
+                localStorage.setItem(
+
+                    "dataAbsen",
+
+                    JSON.stringify(dataAbsen)
+
+                );
+
+
+                document
+                .getElementById("absenForm")
+                .reset();
+
+
+                tampilkanData();
+
+
+                alert(
+                    "✅ Absensi berhasil!"
+                );
+
+            }
+        );
+
+
+        /* TAMPILKAN DATA */
+
+        function tampilkanData(
+            filter = ""
+        ) {
 
             daftar.innerHTML = "";
 
 
             let dataFilter =
-                dataAbsen.filter(function(data) {
+                dataAbsen.filter(
+                    function(data) {
 
-                    return (
-                        data.nama
+                        return data.nama
                             .toLowerCase()
-                            .includes(filter.toLowerCase())
-                        ||
-                        data.nisn.includes(filter)
-                    );
+                            .includes(
+                                filter.toLowerCase()
+                            );
 
-                });
+                    }
+                );
 
 
             if (dataFilter.length === 0) {
@@ -492,10 +836,10 @@
                     <tr>
 
                         <td
-                            colspan="4"
+                            colspan="3"
                             class="empty"
                         >
-                            Belum ada data absensi.
+                            Belum ada siswa yang absen.
                         </td>
 
                     </tr>
@@ -505,43 +849,40 @@
                 updateStatistik();
 
                 return;
+
             }
 
 
-            dataFilter.forEach(function(data) {
+            dataFilter.forEach(
+                function(data) {
 
-                let row =
-                    document.createElement("tr");
-
-
-                row.innerHTML = `
-
-                    <td>
-                        ${data.noAbsen}
-                    </td>
-
-                    <td>
-                        ${data.nama}
-                    </td>
-
-                    <td>
-                        ${data.nisn}
-                    </td>
-
-                    <td>
-
-                        <span class="status">
-                            Hadir
-                        </span>
-
-                    </td>
-
-                `;
+                    let row =
+                        document.createElement("tr");
 
 
-                daftar.appendChild(row);
+                    row.innerHTML = `
 
-            });
+                        <td>
+                            ${data.noAbsen}
+                        </td>
+
+                        <td>
+                            ${data.nama}
+                        </td>
+
+                        <td>
+                            <span class="status">
+                                Hadir
+                            </span>
+                        </td>
+
+                    `;
+
+
+                    daftar.appendChild(row);
+
+                }
+            );
 
 
             updateStatistik();
@@ -577,98 +918,7 @@
         }
 
 
-        /* SUBMIT ABSENSI */
-
-        form.addEventListener(
-            "submit",
-            function(event) {
-
-                event.preventDefault();
-
-
-                const nama =
-                    document
-                    .getElementById("nama")
-                    .value
-                    .trim();
-
-
-                const nisn =
-                    document
-                    .getElementById("nisn")
-                    .value
-                    .trim();
-
-
-                const noAbsen =
-                    document
-                    .getElementById("noAbsen")
-                    .value
-                    .trim();
-
-
-                /* CEK NISN */
-
-                const sudahAbsen =
-                    dataAbsen.some(
-                        function(data) {
-
-                            return data.nisn === nisn;
-
-                        }
-                    );
-
-
-                if (sudahAbsen) {
-
-                    alert(
-                        "⚠️ NISN tersebut sudah melakukan absensi!"
-                    );
-
-                    return;
-
-                }
-
-
-                /* SIMPAN DATA */
-
-                dataAbsen.push({
-
-                    nama: nama,
-
-                    nisn: nisn,
-
-                    noAbsen: noAbsen
-
-                });
-
-
-                localStorage.setItem(
-
-                    "dataAbsen",
-
-                    JSON.stringify(dataAbsen)
-
-                );
-
-
-                /* RESET FORM */
-
-                form.reset();
-
-
-                tampilkanData();
-
-
-                alert(
-                    "✅ Absensi berhasil dicatat!"
-                );
-
-            }
-        );
-
-
-        /* PENCARIAN */
+        /* SEARCH */
 
         search.addEventListener(
             "input",
@@ -682,9 +932,25 @@
         );
 
 
-        /* JALANKAN SAAT HALAMAN DIBUKA */
+        /* LOGOUT */
 
-        tampilkanData();
+        function logout() {
+
+            userSekarang = "";
+
+            loginPage.classList.remove("hidden");
+
+            absenPage.classList.add("hidden");
+
+            statistik.classList.add("hidden");
+
+            daftarPage.classList.add("hidden");
+
+            document
+            .getElementById("loginForm")
+            .reset();
+
+        }
 
     </script>
 
